@@ -1,0 +1,150 @@
+openapi: 3.0.0
+info:
+  title: Github User Repositories
+  description: API definitions for Github User Repositories
+  version: '1.1'
+  contact: {
+    "name": "Naji Naser",
+    }
+tags:
+- name: health
+  description: Cheack if service is healthy
+  
+- name: repositories
+  description: For wach user on Github there are som Repositories.
+
+servers: []
+components:
+  schemas:
+    ListRepositories:
+      type: object
+      properties:
+        status:
+          type: object
+          example: 
+           code: 200
+           message: "repositories has been called succefully"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: some-repo
+              ownerLogin:
+                type: string
+                example: naji
+              fork:
+                type: boolean
+                example: false
+              branchs:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name: 
+                      type: string
+                      example: master
+                    sha: 
+                      type: string
+                      example: f3e58e21b3abc671b5270183488234
+    ResponseNotFound:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            code: 
+              type: integer
+              format: int8
+              example: 404
+            message:
+              type: string
+              example: The provided user does not have Github account!
+          required:
+            - code
+        errors:
+          type: object
+          properties:
+            code: 
+              type: integer
+              format: int8
+              example: 404
+            message:
+              type: string
+              example: The provided user does not have Github account!
+    
+    IncorrectRequestHeader:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            code: 
+              type: integer
+              format: int8
+              example: 406
+            message:
+              type: string
+              example: Header accepts only JSON format, please check the accept key in the request header
+          required:
+            - code
+  
+paths:
+  /health:
+    get:
+      operationId: HealthController_check
+      summary: ''
+      description: Checks if service is healthy
+      parameters: []
+      responses:
+        '200':
+          description: The Health Check is successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    example: 
+                      code: 200
+                      message: The app is healthy!"
+      tags:
+      - health
+  
+  /repositories/{username}:
+    get:
+      summary: 'Get Github repositories for the given user'
+      description: return the repositories for github user
+      parameters:
+      - name: username
+        required: true
+        in: path
+        description: Github client name.
+        example: karajah-naji
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRepositories'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseNotFound'
+        '406':
+          description: Incorrect request header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncorrectRequestHeader'
+      tags:
+      - repositories
+  
