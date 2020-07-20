@@ -1,14 +1,14 @@
 # TUI-Github-User-Repositories
 
 Tui-task,
-This project built for api consumer. Given the username I would like to list all user github repositories, which are not forks.
+This project built for api consumer. It will list the github repositories or the given user, which are not forks.
 
 ## Technologies Used
 
 - [Typescript](https://www.typescriptlang.org/)
 - [Jest](https://jestjs.io/)
 - [Standard JS](https://standardjs.com/)
-- [Githup API](https://developer.github.com/v3)
+- [GitHup API](https://developer.github.com/v3)
 
 
 ### Prerequisites
@@ -27,6 +27,8 @@ npm lint      => to check the standard format
 npm lint:fix  => to fix code format
 npm test      => to run the ubi test
 ```
+The project will run on (http://localhost:3000), 
+To check the project health, call http://localhost:3000/health
 
 ## Contributing to this project
 
