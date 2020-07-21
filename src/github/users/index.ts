@@ -34,6 +34,7 @@ class User {
 
         return user
       } catch (error) {
+        //TODO. distingush between User dont exist error and other errors 
         throw new UserDoesNotExist()
       }
     }

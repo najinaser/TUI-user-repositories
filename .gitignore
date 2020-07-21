@@ -6,3 +6,6 @@ test-results/
 
 # combiled
 dist/
+
+# coverage
+coverage/
