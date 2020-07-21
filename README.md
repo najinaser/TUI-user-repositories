@@ -38,9 +38,10 @@ To check the project health, call http://localhost:3000/health
  - API first, Agree about the API before the implementation.
  - Update the YAML file to fit the client requirnment.
  - Implementation.
- - Ensure the implementation results the same as the YAML file.
+ - Ensure the implementation results the same as the YAML file. (TODO: build swagger generator)
 
 ## TODO
 - Ensure about the commint sha is the last commint sha
 - Build 404 page
 - Refactor the API controllers
+- E2E test.
